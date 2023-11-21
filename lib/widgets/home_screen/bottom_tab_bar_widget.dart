@@ -20,7 +20,7 @@ class BottomBarNavigation extends StatelessWidget {
           label: 'Location',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.book),
+          icon: Icon(Icons.receipt),
           label: 'Booking',
         ),
         BottomNavigationBarItem(

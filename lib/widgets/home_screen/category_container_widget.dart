@@ -43,14 +43,14 @@ class CircularAvatarWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CircleAvatar(
-            radius: 34,
+            radius: 30,
             backgroundColor: color,
             child: CircleAvatar(
               backgroundColor: Colors.white,
-              radius: 32,
+              radius: 28,
               child: CircleAvatar(
                 backgroundColor: color,
-                radius: 28,
+                radius: 26,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(28),
                     child: Image.asset(image)),

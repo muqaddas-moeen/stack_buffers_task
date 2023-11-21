@@ -23,7 +23,7 @@ class SearchBarWidget extends StatelessWidget {
         // );
 
         SizedBox(
-      width: SizeConfig.safeBlockHorizontal * 80,
+      width: SizeConfig.safeBlockHorizontal * 85,
       height: SizeConfig.safeBlockVertical * 7,
       child: Material(
         elevation: 5.0,
@@ -44,7 +44,15 @@ class SearchBarWidget extends StatelessWidget {
             ),
             suffixIcon: const CircleAvatar(
               radius: 30,
-              backgroundColor: Color.fromARGB(255, 106, 104, 218),
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 21,
+                backgroundColor: Color.fromARGB(255, 106, 104, 218),
+                child: Icon(
+                  Icons.tune,
+                  color: Colors.white,
+                ),
+              ),
             ),
             contentPadding: const EdgeInsets.all(10),
             border: OutlineInputBorder(

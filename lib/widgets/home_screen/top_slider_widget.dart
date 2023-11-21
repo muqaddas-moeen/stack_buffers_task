@@ -1,66 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:stack_buffers_task/config/screen_size_config.dart';
 import 'package:stack_buffers_task/data/top_slider_list.dart';
 import 'package:stack_buffers_task/model/top_slider.dart';
 
 class TopSliderWidget extends StatelessWidget {
   TopSliderWidget({super.key});
+  //List<TopSlider> topSliderList;
 
+  /// View for the top slider that scrolls horizontally.
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: topSliderList.length,
-        itemBuilder: (context, index) => SliderContainer(
-            id: topSliderList[index].id,
-            title: topSliderList[index].title,
-            description: topSliderList[index].description,
-            buttonText: topSliderList[index].buttonText,
-            image: topSliderList[index].image));
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      itemCount: topSliderList.length,
+      itemBuilder: (context, index) {
+        TopSlider sliderItems = topSliderList[index];
+        return _buildSlider(sliderItems, context);
+      },
+    );
   }
-}
 
-class SliderContainer extends StatelessWidget {
-  String id;
-  String title;
-  String description;
-  String buttonText;
-  String image;
-  SliderContainer(
-      {super.key,
-      required this.id,
-      required this.title,
-      required this.description,
-      required this.buttonText,
-      required this.image});
-
-  @override
-  Widget build(BuildContext context) {
+  /// Builds an individual slider widget.
+  Widget _buildSlider(TopSlider topSlider, BuildContext context) {
+    SizeConfig().init(context);
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10),
       child: Container(
-        height: 80,
-        width: 300,
+        width: SizeConfig.safeBlockHorizontal * 80,
+        height: SizeConfig.safeBlockVertical * 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          image: DecorationImage(
-            image: NetworkImage(image),
-            fit: BoxFit.cover,
-          ),
+          // image: DecorationImage(
+          //   image: NetworkImage(image),
+          //   fit: BoxFit.cover,
+          // ),
           color: Colors.pink,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
+            //mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                title,
+                topSlider.title,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              Text(description),
-              ElevatedButton(onPressed: () {}, child: Text(buttonText))
+              Text(topSlider.description),
+              ElevatedButton(
+                  onPressed: () {}, child: Text(topSlider.buttonText))
             ],
           ),
         ),

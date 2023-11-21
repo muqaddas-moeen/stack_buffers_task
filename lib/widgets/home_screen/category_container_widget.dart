@@ -7,10 +7,12 @@ class CategoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true,
+      //shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
       scrollDirection: Axis.horizontal,
       itemCount: categoryList.length,
-      itemBuilder: (context, index) => CircularAvatar(
+      itemBuilder: (context, index) => CircularAvatarWidget(
           image: categoryList[index].image,
           color: categoryList[index].color,
           id: categoryList[index].id,
@@ -19,12 +21,12 @@ class CategoryWidget extends StatelessWidget {
   }
 }
 
-class CircularAvatar extends StatelessWidget {
+class CircularAvatarWidget extends StatelessWidget {
   String id;
   String image;
   Color color;
   String title;
-  CircularAvatar(
+  CircularAvatarWidget(
       {super.key,
       required this.image,
       required this.color,
@@ -33,21 +35,31 @@ class CircularAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CircleAvatar(
-          radius: 32,
-          backgroundColor: color,
-          child: CircleAvatar(
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircleAvatar(
+            radius: 34,
             backgroundColor: color,
-            radius: 28,
-            child: Image.asset(image),
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              radius: 32,
+              child: CircleAvatar(
+                backgroundColor: color,
+                radius: 28,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(28),
+                    child: Image.asset(image)),
+              ),
+            ),
           ),
-        ),
-        Text(title)
-      ],
+          Text(title)
+        ],
+      ),
     );
   }
 }
